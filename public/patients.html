@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hastalar | Akıllı Hasta Takip</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(135deg,#020617,#0f172a,#111827);
+      color:white;
+      overflow-x:hidden;
+    }
+
+    .glow1{
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:#38bdf820;
+      filter:blur(120px);
+      border-radius:50%;
+      top:-150px;
+      left:-120px;
+      z-index:-1;
+    }
+
+    .glow2{
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:#22c55e20;
+      filter:blur(120px);
+      border-radius:50%;
+      bottom:-150px;
+      right:-120px;
+      z-index:-1;
+    }
+
+    /* HEADER */
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 40px;
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      color:#38bdf8;
+    }
+
+    .menu{
+      display:flex;
+      gap:25px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:#cbd5e1;
+      transition:.3s;
+    }
+
+    .menu a:hover{
+      color:#38bdf8;
+    }
+
+    /* HERO */
+
+    .hero{
+      text-align:center;
+      padding:70px 20px 40px;
+    }
+
+    .hero h1{
+      font-size:56px;
+      margin-bottom:20px;
+
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      color:#cbd5e1;
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
+      font-size:18px;
+    }
+
+    /* GRID */
+
+    .patients-container{
+      max-width:1400px;
+      margin:auto;
+      padding:20px 40px 80px;
+    }
+
+    .patient-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    /* CARD */
+
+    .patient-card{
+
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+
+      border-radius:30px;
+      padding:30px;
+
+      backdrop-filter:blur(12px);
+
+      transition:.3s;
+
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+    }
+
+    .patient-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .avatar{
+      width:75px;
+      height:75px;
+
+      border-radius:50%;
+
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+
+      display:flex;
+      justify-content:center;
+      align-items:center;
+
+      font-size:30px;
+
+      margin-bottom:25px;
+    }
+
+    .patient-name{
+      font-size:26px;
+      margin-bottom:10px;
+      font-weight:600;
+    }
+
+    .patient-info{
+      color:#cbd5e1;
+      line-height:1.9;
+      margin-bottom:25px;
+    }
+
+    .status{
+      display:inline-block;
+
+      padding:10px 18px;
+
+      border-radius:20px;
+
+      background:#22c55e20;
+      color:#22c55e;
+
+      border:1px solid #22c55e50;
+
+      font-size:14px;
+      font-weight:600;
+
+      margin-bottom:25px;
+    }
+
+    .view-btn{
+
+      width:100%;
+
+      padding:16px;
+
+      border:none;
+      border-radius:18px;
+
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+
+      color:white;
+
+      font-size:15px;
+      font-weight:600;
+
+      cursor:pointer;
+
+      transition:.3s;
+    }
+
+    .view-btn:hover{
+      transform:translateY(-3px);
+      box-shadow:0 10px 25px rgba(56,189,248,.25);
+    }
+
+    /* EMPTY */
+
+    .empty{
+      text-align:center;
+      color:#94a3b8;
+      padding:60px 20px;
+      font-size:20px;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      margin-top:60px;
+      padding:35px;
+      text-align:center;
+      color:#94a3b8;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      .header{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:40px;
+      }
+
+      .patients-container{
+        padding:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo">
+    🩺 Akıllı Hasta Takip
+  </div>
+
+  <nav class="menu">
+    <a href="home.html">Ana Sayfa</a>
+    <a href="add.html">Hasta Ekle</a>
+    <a href="profile.html">Profil</a>
+    <a href="index.html">Çıkış</a>
+  </nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <h1>Hasta Yönetim Sistemi</h1>
+
+  <p>
+    Sisteme kayıtlı hastaları görüntüleyin.
+    Sağlık verileri ESP sensörlerinden canlı alınacaktır.
+  </p>
+
+</section>
+
+<!-- PATIENTS -->
+
+<section class="patients-container">
+
+  <div class="patient-grid" id="patientGrid">
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  © 2026 Akıllı Hasta Takip Sistemi • IoT Sağlık Teknolojileri
+</footer>
+
+<script>
+
+async function loadPatients(){
+
+  try{
+
+    const response =
+      await fetch("/api/patients");
+
+    const data =
+      await response.json();
+
+    const grid =
+      document.getElementById("patientGrid");
+
+    grid.innerHTML = "";
+
+    if(data.patients.length === 0){
+
+      grid.innerHTML = `
+        <div class="empty">
+          🚫 Sistemde kayıtlı hasta bulunamadı.
+        </div>
+      `;
+
+      return;
+    }
+
+    data.patients.forEach(patient => {
+
+      grid.innerHTML += `
+
+        <div class="patient-card">
+
+          <div class="avatar">
+            👨‍⚕️
+          </div>
+
+          <div class="patient-name">
+            ${patient.name}
+          </div>
+
+          <div class="patient-info">
+
+            👤 Yaş: ${patient.age}
+            <br>
+
+            🚻 Cinsiyet: ${patient.gender}
+            <br>
+
+            🏥 Oda: ${patient.room}
+
+          </div>
+
+          <div class="status">
+            🟢 Sensör Bekleniyor
+          </div>
+
+          <button
+            class="view-btn"
+            onclick="goPatient(${patient.id})"
+          >
+            📄 Hasta Detayı
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+function goPatient(id){
+
+  localStorage.setItem("selectedPatient", id);
+
+  window.location.href = "patient.html";
+
+}
+
+loadPatients();
+
+</script>
+
+</body>
+</html>

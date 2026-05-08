@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hasta Ekle | Akıllı Hasta Takip</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(135deg,#020617,#0f172a,#111827);
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* BACKGROUND */
+
+    .glow1{
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:#38bdf820;
+      filter:blur(120px);
+      border-radius:50%;
+      top:-150px;
+      left:-120px;
+      z-index:-1;
+    }
+
+    .glow2{
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:#22c55e20;
+      filter:blur(120px);
+      border-radius:50%;
+      bottom:-150px;
+      right:-120px;
+      z-index:-1;
+    }
+
+    /* HEADER */
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 40px;
+      background:rgba(255,255,255,.04);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      color:#38bdf8;
+    }
+
+    .menu{
+      display:flex;
+      gap:25px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:#cbd5e1;
+      transition:.3s;
+    }
+
+    .menu a:hover{
+      color:#38bdf8;
+    }
+
+    /* HERO */
+
+    .hero{
+      text-align:center;
+      padding:70px 20px 40px;
+    }
+
+    .hero h1{
+      font-size:54px;
+      margin-bottom:20px;
+
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      color:#cbd5e1;
+      max-width:700px;
+      margin:auto;
+      line-height:1.8;
+      font-size:18px;
+    }
+
+    /* FORM */
+
+    .container{
+      max-width:850px;
+      margin:auto;
+      padding:20px 20px 80px;
+    }
+
+    .form-card{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:32px;
+      padding:40px;
+      backdrop-filter:blur(12px);
+      box-shadow:0 10px 40px rgba(0,0,0,.35);
+    }
+
+    .form-title{
+      font-size:30px;
+      margin-bottom:30px;
+      color:#38bdf8;
+      text-align:center;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .form-group{
+      margin-bottom:24px;
+    }
+
+    .form-group label{
+      display:block;
+      margin-bottom:10px;
+      color:#e2e8f0;
+      font-size:14px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea{
+
+      width:100%;
+      padding:16px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.08);
+
+      background:rgba(255,255,255,.04);
+      color:white;
+
+      outline:none;
+      font-size:15px;
+      transition:.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus{
+
+      border-color:#38bdf8;
+      box-shadow:0 0 15px rgba(56,189,248,.25);
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:18px;
+      border:none;
+      border-radius:20px;
+
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+
+      color:white;
+      font-size:16px;
+      font-weight:600;
+
+      cursor:pointer;
+      transition:.3s;
+      margin-top:10px;
+    }
+
+    .submit-btn:hover{
+      transform:translateY(-4px);
+      box-shadow:0 10px 25px rgba(56,189,248,.25);
+    }
+
+    /* SENSOR INFO */
+
+    .sensor-info{
+      margin-top:35px;
+
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+
+      border-radius:24px;
+      padding:28px;
+    }
+
+    .sensor-info h3{
+      color:#38bdf8;
+      margin-bottom:15px;
+      font-size:24px;
+    }
+
+    .sensor-info p{
+      color:#cbd5e1;
+      line-height:1.8;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      margin-top:60px;
+      padding:35px;
+      text-align:center;
+      color:#94a3b8;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      font-size:14px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      .header{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+
+      .row{
+        grid-template-columns:1fr;
+      }
+
+      .form-card{
+        padding:25px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo">
+    🩺 Akıllı Hasta Takip
+  </div>
+
+  <nav class="menu">
+    <a href="home.html">Ana Sayfa</a>
+    <a href="patients.html">Hastalar</a>
+    <a href="profile.html">Profil</a>
+    <a href="index.html">Çıkış</a>
+  </nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <h1>Yeni Hasta Kaydı</h1>
+
+  <p>
+    Sisteme yeni hasta ekleyin.
+    Nabız ve sıcaklık verileri ESP sensörlerinden otomatik alınacaktır.
+  </p>
+
+</section>
+
+<!-- FORM -->
+
+<section class="container">
+
+  <div class="form-card">
+
+    <h2 class="form-title">
+      👨‍⚕️ Hasta Bilgileri
+    </h2>
+
+    <form id="patientForm">
+
+      <div class="row">
+
+        <div class="form-group">
+          <label>Hasta Adı</label>
+
+          <input
+            type="text"
+            id="name"
+            placeholder="Ad Soyad"
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Yaş</label>
+
+          <input
+            type="number"
+            id="age"
+            placeholder="Yaş"
+          >
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="form-group">
+
+          <label>Cinsiyet</label>
+
+          <select id="gender">
+            <option>Erkek</option>
+            <option>Kadın</option>
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Oda Numarası</label>
+
+          <input
+            type="text"
+            id="room"
+            placeholder="A-204"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Hasta Notları</label>
+
+        <textarea
+          id="notes"
+          rows="5"
+          placeholder="Hasta hakkında notlar..."
+        ></textarea>
+
+      </div>
+
+      <button type="submit" class="submit-btn">
+        ➕ Hastayı Kaydet
+      </button>
+
+    </form>
+
+    <!-- SENSOR INFO -->
+
+    <div class="sensor-info">
+
+      <h3>📡 Sensör Veri Sistemi</h3>
+
+      <p>
+        Hastaların nabız ve sıcaklık verileri
+        ESP tabanlı IoT sensörlerinden otomatik olarak alınacaktır.
+        Sistem gerçek zamanlı veri takibi için yapılandırılmıştır.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  © 2026 Akıllı Hasta Takip Sistemi • IoT Sağlık Teknolojileri
+</footer>
+
+<script>
+
+const form = document.getElementById("patientForm");
+
+form.addEventListener("submit", async (e) => {
+
+  e.preventDefault();
+
+  const patient = {
+
+    name:
+      document.getElementById("name").value,
+
+    age:
+      document.getElementById("age").value,
+
+    gender:
+      document.getElementById("gender").value,
+
+    room:
+      document.getElementById("room").value,
+
+    notes:
+      document.getElementById("notes").value
+
+  };
+
+  try{
+
+    const response = await fetch("/add-patient", {
+
+      method:"POST",
+
+      headers:{
+        "Content-Type":"application/json"
+      },
+
+      body:JSON.stringify(patient)
+
+    });
+
+    const data = await response.json();
+
+    alert("✅ Hasta başarıyla kaydedildi!");
+
+    console.log(data);
+
+    form.reset();
+
+  }
+  catch(error){
+
+    console.log(error);
+
+    alert("❌ Sunucu bağlantı hatası!");
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>

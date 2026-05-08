@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akıllı Hasta Takip Sistemi</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Poppins',sans-serif;
+      background:linear-gradient(135deg,#020617,#0f172a,#111827);
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* BACKGROUND GLOW */
+
+    .glow1{
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:#38bdf830;
+      filter:blur(120px);
+      border-radius:50%;
+      top:-200px;
+      right:-100px;
+      z-index:-1;
+    }
+
+    .glow2{
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:#22c55e20;
+      filter:blur(120px);
+      border-radius:50%;
+      bottom:-150px;
+      left:-100px;
+      z-index:-1;
+    }
+
+    /* HEADER */
+
+    .header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:22px 40px;
+      background:rgba(255,255,255,0.04);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      position:sticky;
+      top:0;
+      z-index:999;
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:700;
+      color:#38bdf8;
+    }
+
+    .menu{
+      display:flex;
+      gap:25px;
+    }
+
+    .menu a{
+      text-decoration:none;
+      color:#cbd5e1;
+      transition:.3s;
+      font-size:15px;
+    }
+
+    .menu a:hover{
+      color:#38bdf8;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:90vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px 20px;
+    }
+
+    .hero-content{
+      max-width:900px;
+    }
+
+    .hero h1{
+      font-size:70px;
+      line-height:1.2;
+      margin-bottom:25px;
+
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      color:#cbd5e1;
+      font-size:20px;
+      line-height:1.9;
+      max-width:800px;
+      margin:auto;
+      margin-bottom:40px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 28px;
+      border-radius:18px;
+      text-decoration:none;
+      font-weight:600;
+      transition:.3s;
+    }
+
+    .btn-primary{
+      background:linear-gradient(to right,#38bdf8,#22c55e);
+      color:white;
+      box-shadow:0 10px 30px rgba(56,189,248,.3);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-4px);
+    }
+
+    .btn-secondary{
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.05);
+      color:white;
+    }
+
+    .btn-secondary:hover{
+      background:rgba(255,255,255,.1);
+    }
+
+    /* LIVE STATS */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+      padding:0 40px 80px;
+      max-width:1400px;
+      margin:auto;
+    }
+
+    .stat-card{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(12px);
+      border-radius:28px;
+      padding:30px;
+      text-align:center;
+      transition:.3s;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .stat-icon{
+      font-size:40px;
+      margin-bottom:15px;
+    }
+
+    .stat-value{
+      font-size:42px;
+      font-weight:700;
+      color:#38bdf8;
+      margin-bottom:8px;
+    }
+
+    .stat-title{
+      color:#cbd5e1;
+      font-size:15px;
+    }
+
+    /* ABOUT */
+
+    .about{
+      padding:100px 40px;
+      max-width:1300px;
+      margin:auto;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:48px;
+      margin-bottom:20px;
+      color:#38bdf8;
+    }
+
+    .section-sub{
+      text-align:center;
+      color:#cbd5e1;
+      max-width:800px;
+      margin:auto;
+      line-height:1.9;
+      margin-bottom:70px;
+      font-size:18px;
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:28px;
+      padding:35px;
+      transition:.3s;
+      backdrop-filter:blur(10px);
+    }
+
+    .feature-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .feature-icon{
+      font-size:45px;
+      margin-bottom:20px;
+    }
+
+    .feature-card h3{
+      margin-bottom:15px;
+      color:#38bdf8;
+      font-size:24px;
+    }
+
+    .feature-card p{
+      color:#cbd5e1;
+      line-height:1.8;
+      font-size:15px;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      margin-top:80px;
+      padding:35px;
+      text-align:center;
+      border-top:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      color:#94a3b8;
+      font-size:14px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+      .header{
+        flex-direction:column;
+        gap:20px;
+      }
+
+      .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:42px;
+      }
+
+      .hero p{
+        font-size:17px;
+      }
+
+      .section-title{
+        font-size:34px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo">
+    🩺 Akıllı Hasta Takip
+  </div>
+
+  <nav class="menu">
+    <a href="home.html">Ana Sayfa</a>
+    <a href="patients.html">Hastalar</a>
+    <a href="add.html">Hasta Ekle</a>
+    <a href="profile.html">Profil</a>
+    <a href="index.html">Çıkış</a>
+  </nav>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1>
+      IoT Destekli Akıllı Hasta Takip Sistemi
+    </h1>
+
+    <p>
+      ESP tabanlı sensörler ile hastaların nabız, sıcaklık ve sağlık verilerini
+      gerçek zamanlı takip edin. Modern web paneli sayesinde tüm verileri güvenli,
+      hızlı ve kolay şekilde yönetin.
+    </p>
+
+    <div class="hero-buttons">
+
+      <a href="patients.html" class="btn btn-primary">
+        👥 Hastaları Görüntüle
+      </a>
+
+      <a href="add.html" class="btn btn-secondary">
+        ➕ Yeni Hasta Ekle
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- LIVE STATS -->
+
+<section class="stats">
+
+  <div class="stat-card">
+    <div class="stat-icon">❤️</div>
+    <div class="stat-value">78</div>
+    <div class="stat-title">Anlık Nabız</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🌡️</div>
+    <div class="stat-value">36.5°</div>
+    <div class="stat-title">Vücut Sıcaklığı</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">📡</div>
+    <div class="stat-value">CANLI</div>
+    <div class="stat-title">Sensör Bağlantısı</div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon">🩺</div>
+    <div class="stat-value">12</div>
+    <div class="stat-title">Takip Edilen Hasta</div>
+  </div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="about">
+
+  <h2 class="section-title">
+    Sağlık Teknolojisinde Yeni Nesil Takip
+  </h2>
+
+  <p class="section-sub">
+    Akıllı hasta takip sistemi; IoT sensörleri, gerçek zamanlı veri analizi ve
+    modern web teknolojilerini birleştirerek sağlık süreçlerini dijital ortama taşır.
+  </p>
+
+  <div class="features">
+
+    <div class="feature-card">
+      <div class="feature-icon">❤️</div>
+
+      <h3>Nabız Takibi</h3>
+
+      <p>
+        Hastaların kalp atış değerlerini gerçek zamanlı olarak analiz edin
+        ve kritik durumları erkenden tespit edin.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🌡️</div>
+
+      <h3>Sıcaklık Ölçümü</h3>
+
+      <p>
+        Vücut sıcaklığı verilerini sensörler üzerinden otomatik olarak alın
+        ve sistem panelinde görüntüleyin.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📡</div>
+
+      <h3>Canlı Veri Aktarımı</h3>
+
+      <p>
+        ESP tabanlı sistem sayesinde sağlık verileri web paneline
+        gerçek zamanlı olarak aktarılır.
+      </p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+
+      <h3>Akıllı Dashboard</h3>
+
+      <p>
+        Modern kullanıcı paneli sayesinde tüm sağlık verilerini
+        kolayca yönetin ve analiz edin.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+  © 2026 Akıllı Hasta Takip Sistemi • IoT & Sağlık Teknolojileri
+</footer>
+
+</body>
+</html>
