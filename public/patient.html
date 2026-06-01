@@ -455,10 +455,7 @@
 <footer class="footer">
   © 2026 Akıllı Hasta Takip Sistemi • IoT Sağlık Teknolojileri
 </footer>
-
 <script>
-
-/* HASTA YÜKLE */
 
 async function loadPatient(){
 
@@ -475,26 +472,27 @@ async function loadPatient(){
     const data =
       await response.json();
 
-    const patient = data.patient;
+    if(data.patient){
 
-    document.getElementById("patientName")
-      .innerText = patient.name;
+      document.getElementById("patientName").innerText =
+        data.patient.name || "--";
 
-    document.getElementById("patientId")
-      .innerText = "Hasta ID: #" + patient.id;
+      document.getElementById("patientId").innerText =
+        "Hasta ID: #" + data.patient.id;
 
-    document.getElementById("patientAge")
-      .innerText = patient.age;
+      document.getElementById("patientAge").innerText =
+        data.patient.age || "--";
 
-    document.getElementById("patientGender")
-      .innerText = patient.gender;
+      document.getElementById("patientGender").innerText =
+        data.patient.gender || "--";
 
-    document.getElementById("patientRoom")
-      .innerText = patient.room;
+      document.getElementById("patientRoom").innerText =
+        data.patient.room || "--";
 
-    document.getElementById("patientNotes")
-      .innerText =
-        patient.notes || "Not bulunamadı.";
+      document.getElementById("patientNotes").innerText =
+        data.patient.notes || "--";
+
+    }
 
   }
   catch(error){
@@ -505,7 +503,6 @@ async function loadPatient(){
 
 }
 
-/* SENSOR */
 async function loadSensorData(){
 
   try{
@@ -517,56 +514,16 @@ async function loadSensorData(){
       await response.json();
 
     document.getElementById("pulse").innerText =
-      data.pulse || "--";
+      data.pulse + " BPM";
 
     document.getElementById("temp").innerText =
-      data.bodyTemperature
-      ? data.bodyTemperature + "°C"
-      : "--";
+      data.bodyTemperature + " °C";
 
     document.getElementById("roomTemp").innerText =
-      data.roomTemperature
-      ? data.roomTemperature + "°C"
-      : "--";
+      data.roomTemperature + " °C";
 
     document.getElementById("humidity").innerText =
-      data.humidity
-      ? data.humidity + "%"
-      : "--";
-
-  }
-  catch(error){
-
-    console.log(error);
-
-  }
-
-}
-{
-
-  try{
-
-    const response =
-      await fetch("/api/sensor");
-
-    const data =
-      await response.json();
-
-    document.getElementById("pulse")
-      .innerText =
-        data.pulse || "--";
-
-    document.getElementById("temp")
-      .innerText =
-        data.temperature
-        ? data.temperature + "°"
-        : "--";
-
-    document.getElementById("oxygen")
-      .innerText =
-        data.oxygen
-        ? data.oxygen + "%"
-        : "--";
+      data.humidity + " %";
 
   }
   catch(error){
@@ -578,44 +535,6 @@ async function loadSensorData(){
 }
 
 loadPatient();
-
-loadSensorData();
-
-setInterval(loadSensorData, 2000);
-
-</script>
-<script>
-
-async function loadSensorData() {
-
-  try {
-
-    const response =
-      await fetch("/api/sensor");
-
-    const data =
-      await response.json();
-
-    document.getElementById("pulse").innerText =
-      data.pulse + " BPM";
-
-    document.getElementById("bodyTemp").innerText =
-      data.bodyTemperature + " °C";
-
-    document.getElementById("roomTemp").innerText =
-      data.roomTemperature + " °C";
-
-    document.getElementById("humidity").innerText =
-      data.humidity + " %";
-
-  } catch(error) {
-
-    console.log(error);
-
-  }
-
-}
-
 loadSensorData();
 
 setInterval(loadSensorData, 2000);
