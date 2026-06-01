@@ -584,6 +584,42 @@ loadSensorData();
 setInterval(loadSensorData, 2000);
 
 </script>
+<script>
 
+async function loadSensorData() {
+
+  try {
+
+    const response =
+      await fetch("/api/sensor");
+
+    const data =
+      await response.json();
+
+    document.getElementById("pulse").innerText =
+      data.pulse + " BPM";
+
+    document.getElementById("bodyTemp").innerText =
+      data.bodyTemperature + " °C";
+
+    document.getElementById("roomTemp").innerText =
+      data.roomTemperature + " °C";
+
+    document.getElementById("humidity").innerText =
+      data.humidity + " %";
+
+  } catch(error) {
+
+    console.log(error);
+
+  }
+
+}
+
+loadSensorData();
+
+setInterval(loadSensorData, 2000);
+
+</script>
 </body>
 </html>
