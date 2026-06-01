@@ -36,11 +36,11 @@ let patients = [];
 let sensorData = {
 
   pulse: "--",
-  temperature: "--",
-  oxygen: "--"
+  bodyTemperature: "--",
+  roomTemperature: "--",
+  humidity: "--"
 
 };
-
 /* =========================
    PAGE ROUTES
 ========================= */
@@ -222,16 +222,18 @@ app.post("/api/sensor", (req,res)=>{
   const {
 
     pulse,
-    temperature,
-    oxygen
+    bodyTemperature,
+    roomTemperature,
+    humidity
 
   } = req.body;
 
   sensorData = {
 
     pulse,
-    temperature,
-    oxygen
+    bodyTemperature,
+    roomTemperature,
+    humidity
 
   };
 

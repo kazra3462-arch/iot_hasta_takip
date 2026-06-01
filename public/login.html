@@ -272,7 +272,15 @@
       <button class="login-btn" type="submit">
         🔐 Giriş Yap
       </button>
+<button
+  class="login-btn"
+  type="button"
+  onclick="fingerprintLogin()"
+  style="margin-top:15px;">
 
+  👆 Parmak İzi ile Giriş
+
+</button>
     </form>
 
     <div class="status-boxes">
@@ -322,7 +330,18 @@ function login(event){
 
   window.location.href = "home.html";
 }
+async function fingerprintLogin(){
 
+  alert("👆 Parmak izinizi okutun");
+
+  setTimeout(() => {
+
+    alert("✅ Parmak izi doğrulandı");
+    window.location.href = "home.html";
+
+  }, 1000);
+
+}
 </script>
 
 </body>

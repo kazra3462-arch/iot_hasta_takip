@@ -376,74 +376,33 @@
 
     <!-- SENSOR -->
 
-    <div class="stats">
+<div class="stats">
 
-      <div class="stat-card">
+  <div class="stat-card">
+    <div class="stat-icon">❤️</div>
+    <div class="stat-value" id="pulse">--</div>
+    <div class="stat-title">Nabız (BPM)</div>
+  </div>
 
-        <div class="stat-icon">
-          ❤️
-        </div>
+  <div class="stat-card">
+    <div class="stat-icon">🌡️</div>
+    <div class="stat-value" id="temp">--</div>
+    <div class="stat-title">Vücut Sıcaklığı (MLX90614)</div>
+  </div>
 
-        <div class="stat-value" id="pulse">
-          --
-        </div>
+  <div class="stat-card">
+    <div class="stat-icon">🌡️</div>
+    <div class="stat-value" id="roomTemp">--</div>
+    <div class="stat-title">Ortam Sıcaklığı (DHT11)</div>
+  </div>
 
-        <div class="stat-title">
-          Nabız (BPM)
-        </div>
+  <div class="stat-card">
+    <div class="stat-icon">💧</div>
+    <div class="stat-value" id="humidity">--</div>
+    <div class="stat-title">Nem (%)</div>
+  </div>
 
-      </div>
-
-      <div class="stat-card">
-
-        <div class="stat-icon">
-          🌡️
-        </div>
-
-        <div class="stat-value" id="temp">
-          --
-        </div>
-
-        <div class="stat-title">
-          Vücut Sıcaklığı
-        </div>
-
-      </div>
-
-      <div class="stat-card">
-
-        <div class="stat-icon">
-          🫁
-        </div>
-
-        <div class="stat-value" id="oxygen">
-          --
-        </div>
-
-        <div class="stat-title">
-          Oksijen Seviyesi
-        </div>
-
-      </div>
-
-      <div class="stat-card">
-
-        <div class="stat-icon">
-          📡
-        </div>
-
-        <div class="stat-value">
-          LIVE
-        </div>
-
-        <div class="stat-title">
-          Sensör Bağlantısı
-        </div>
-
-      </div>
-
-    </div>
-
+</div>
     <!-- DETAILS -->
 
     <div class="details">
@@ -547,8 +506,43 @@ async function loadPatient(){
 }
 
 /* SENSOR */
-
 async function loadSensorData(){
+
+  try{
+
+    const response =
+      await fetch("/api/sensor");
+
+    const data =
+      await response.json();
+
+    document.getElementById("pulse").innerText =
+      data.pulse || "--";
+
+    document.getElementById("temp").innerText =
+      data.bodyTemperature
+      ? data.bodyTemperature + "°C"
+      : "--";
+
+    document.getElementById("roomTemp").innerText =
+      data.roomTemperature
+      ? data.roomTemperature + "°C"
+      : "--";
+
+    document.getElementById("humidity").innerText =
+      data.humidity
+      ? data.humidity + "%"
+      : "--";
+
+  }
+  catch(error){
+
+    console.log(error);
+
+  }
+
+}
+{
 
   try{
 
